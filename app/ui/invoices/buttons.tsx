@@ -26,7 +26,11 @@ export function UpdateInvoice({ id }: { id: string }) {
 }
 
 export function DeleteInvoice({ id }: { id: string }) {
-  const deleteInvoiceWithId = deleteInvoice.bind(null, id);
+  const deleteInvoiceWithId = async (formData?: FormData) => {
+    "use server";
+    // call the server action and ignore any return value so the wrapper returns Promise<void>
+    await deleteInvoice(id);
+  };
   return (
     <>
       <form action={deleteInvoiceWithId}>
